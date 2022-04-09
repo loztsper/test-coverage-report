@@ -18,5 +18,5 @@ jobs:
           node-version: 16.x
           cache: "npm"
       - run: npm install
-      - run: npx @vercel/ncc build ./.github/workflows/lib -o ./.github/workflows/dist
+      - run: npx @vercel/ncc build ./.github/workflows/lib/main.ts -o ./.github/workflows/dist
       - run: npm test
