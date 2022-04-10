@@ -18,7 +18,7 @@ export const main = async () => {
     issue_number: context.issue.number,
     owner: context.repo.owner,
     repo: context.repo.repo,
-    body: `| category | pct |\n----|----\n| coverage | ${coverageSummary.total.lines.pct}|`,
+    body: `| category | pct |\n----|----\n| statements | ${coverageSummary.total.statements.pct} & |`,
   });
 };
 
