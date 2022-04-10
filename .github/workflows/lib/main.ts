@@ -1,11 +1,8 @@
 import { readFileSync } from "node:fs";
 import github from "@actions/github";
-import core from "@actions/core";
 
 export const main = async () => {
-  const myToken = core.getInput("myToken");
-
-  const octokit = github.getOctokit(myToken);
+  const octokit = github.getOctokit(process.env.myToken);
   const context = github.context;
 
   const coverageSummary = JSON.parse(

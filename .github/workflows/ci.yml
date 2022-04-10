@@ -23,7 +23,7 @@ jobs:
       - run: npx @vercel/ncc build ./.github/workflows/lib/main.ts -o ./.github/workflows/dist
       - run: yarn test:ci
       - run: node ./.github/workflows/dist
-        with:
+        env:
           myToken: ${{ secrets.GITHUB_TOKEN }}
       # - uses: amondnet/vercel-action@v20.0.1
       #   with:
