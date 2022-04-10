@@ -3,7 +3,11 @@ import github from "@actions/github";
 
 export const main = async () => {
   console.log(process.env.test);
-  const octokit = github.getOctokit(process.env.myToken);
+  const myToken = process.env.myToken;
+
+  if (!myToken) return;
+
+  const octokit = github.getOctokit(myToken);
   const context = github.context;
 
   const coverageSummary = JSON.parse(
