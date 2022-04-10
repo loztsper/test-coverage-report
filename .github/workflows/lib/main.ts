@@ -2,10 +2,12 @@ import { readFileSync } from "node:fs";
 import github from "@actions/github";
 
 export const main = async () => {
-  console.log(process.env.test);
   const myToken = process.env.myToken;
 
-  if (!myToken) return;
+  if (!myToken) {
+    throw new Error("error");
+    return;
+  }
 
   const octokit = github.getOctokit(myToken);
   const context = github.context;
