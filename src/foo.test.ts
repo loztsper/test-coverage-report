@@ -1,5 +1,5 @@
 import { foo } from "./foo";
 
 it("foo", () => {
-  expect(foo()).toBe(2);
+  expect(foo(10)).toBe(10);
 });
