@@ -23,6 +23,7 @@ jobs:
       - run: npx @vercel/ncc build ./.github/workflows/lib/main.ts -o ./.github/workflows/dist
         env:
           myToken: ${{ secrets.GITHUB_TOKEN }}
+          test: "test"
 
       - run: yarn test:ci
       - run: node ./.github/workflows/dist
