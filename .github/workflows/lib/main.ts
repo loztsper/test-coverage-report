@@ -15,43 +15,41 @@ export const main = async () => {
     readFileSync("./coverage/coverage-summary.json", "utf8")
   );
 
-  const comment = await summary
-    .addHeading("Test Results")
-    .addTable([
-      [
-        { data: "Status", header: true },
-        { data: "Category", header: true },
-        { data: "Percentage", header: true },
-        { data: "Covered/Total", header: true },
-      ],
-      [
-        "🟢",
-        "lines",
-        `${coverageSummary.total.lines.pct}%`,
-        `${coverageSummary.total.lines.covered} / ${coverageSummary.total.lines.total}`,
-      ],
-      [
-        "🟢",
-        "functions",
-        `${coverageSummary.total.functions.pct}%`,
-        `${coverageSummary.total.functions.covered} / ${coverageSummary.total.functions.total}`,
-      ],
-      [
-        "🟢",
-        "statements",
-        `${coverageSummary.total.statements.pct}%`,
-        `${coverageSummary.total.statements.covered} / ${coverageSummary.total.statements.total}`,
-      ],
-      [
-        "🟢",
-        "branches",
-        `${coverageSummary.total.branches.pct}%`,
-        `${coverageSummary.total.branches.covered} / ${coverageSummary.total.branches.total}`,
-      ],
-    ])
-    .write();
-
-  console.log(write);
+  const comment = await summary.addHeading("Test Results").addTable([
+    [
+      { data: "Status", header: true },
+      { data: "Category", header: true },
+      { data: "Percentage", header: true },
+      { data: "Covered/Total", header: true },
+    ],
+    [
+      "🟢",
+      "lines",
+      `${coverageSummary.total.lines.pct}%`,
+      `${coverageSummary.total.lines.covered} / ${coverageSummary.total.lines.total}`,
+    ],
+    [
+      "🟢",
+      "functions",
+      `${coverageSummary.total.functions.pct}%`,
+      `${coverageSummary.total.functions.covered} / ${coverageSummary.total.functions.total}`,
+    ],
+    [
+      "🟢",
+      "statements",
+      `${coverageSummary.total.statements.pct}%`,
+      `${coverageSummary.total.statements.covered} / ${coverageSummary.total.statements.total}`,
+    ],
+    [
+      "🟢",
+      "branches",
+      `${coverageSummary.total.branches.pct}%`,
+      `${coverageSummary.total.branches.covered} / ${coverageSummary.total.branches.total}`,
+    ],
+  ]);
+  console.log(comment.stringify());
+  comment.write();
+  console.log(comment.stringify());
 
   await octokit.rest.issues.createComment({
     issue_number: context.issue.number,
@@ -59,7 +57,6 @@ export const main = async () => {
     repo: context.repo.repo,
     body: `| category | pct |\n----|----\n| statements | ${coverageSummary.total.statements.pct} % |\n| branches | ${coverageSummary.total.branches.pct} %|\n| functions | ${coverageSummary.total.functions.pct} %| `,
   });
-  return comment;
 };
 
 main();
