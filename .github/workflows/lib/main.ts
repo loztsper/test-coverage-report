@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, write } from "node:fs";
 import { getOctokit, context } from "@actions/github";
 import { summary } from "@actions/core";
 
@@ -27,29 +27,31 @@ export const main = async () => {
       [
         "🟢",
         "lines",
-        coverageSummary.total.lines.pct,
+        `${coverageSummary.total.lines.pct}%`,
         `${coverageSummary.total.lines.covered} / ${coverageSummary.total.lines.total}`,
       ],
       [
         "🟢",
         "functions",
-        coverageSummary.total.functions.pct,
+        `${coverageSummary.total.functions.pct}%`,
         `${coverageSummary.total.functions.covered} / ${coverageSummary.total.functions.total}`,
       ],
       [
         "🟢",
         "statements",
-        coverageSummary.total.statements.pct,
+        `${coverageSummary.total.statements.pct}%`,
         `${coverageSummary.total.statements.covered} / ${coverageSummary.total.statements.total}`,
       ],
       [
         "🟢",
         "branches",
-        coverageSummary.total.branches.pct,
+        `${coverageSummary.total.branches.pct}%`,
         `${coverageSummary.total.branches.covered} / ${coverageSummary.total.branches.total}`,
       ],
     ])
     .write();
+
+  console.log(write);
 
   await octokit.rest.issues.createComment({
     issue_number: context.issue.number,

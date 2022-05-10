@@ -24,7 +24,7 @@ jobs:
         env:
           myToken: ${{ secrets.GITHUB_TOKEN }}
       - run: yarn test:ci
-      - run: node ./.github/workflows/dist >> $GITHUB_STEP_SUMMARY
+      - run: node ./.github/workflows/dist
         env:
           myToken: ${{ secrets.GITHUB_TOKEN }}
       # - uses: amondnet/vercel-action@v20.0.1
