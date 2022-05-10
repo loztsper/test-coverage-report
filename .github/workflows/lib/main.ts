@@ -47,15 +47,13 @@ export const main = async () => {
       `${coverageSummary.total.branches.covered} / ${coverageSummary.total.branches.total}`,
     ],
   ]);
-  console.log(comment.stringify());
   comment.write();
-  console.log(comment.stringify());
 
   await octokit.rest.issues.createComment({
     issue_number: context.issue.number,
     owner: context.repo.owner,
     repo: context.repo.repo,
-    body: `| category | pct |\n----|----\n| statements | ${coverageSummary.total.statements.pct} % |\n| branches | ${coverageSummary.total.branches.pct} %|\n| functions | ${coverageSummary.total.functions.pct} %| `,
+    body: comment.stringify(),
   });
 };
 
