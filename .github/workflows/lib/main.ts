@@ -15,7 +15,7 @@ export const main = async () => {
     readFileSync("./coverage/coverage-summary.json", "utf8")
   );
 
-  await summary
+  const comment = await summary
     .addHeading("Test Results")
     .addTable([
       [
@@ -57,6 +57,7 @@ export const main = async () => {
     repo: context.repo.repo,
     body: `| category | pct |\n----|----\n| statements | ${coverageSummary.total.statements.pct} % |\n| branches | ${coverageSummary.total.branches.pct} %|\n| functions | ${coverageSummary.total.functions.pct} %| `,
   });
+  return comment;
 };
 
 main();
