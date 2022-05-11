@@ -47,7 +47,6 @@ export const main = async () => {
       `${coverageSummary.total.branches.covered} / ${coverageSummary.total.branches.total}`,
     ],
   ]);
-  await comment.write();
 
   await octokit.rest.issues.createComment({
     issue_number: context.issue.number,
