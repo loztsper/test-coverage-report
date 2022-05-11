@@ -21,10 +21,15 @@ jobs:
           cache: "npm"
       - run: yarn
       - run: npx @vercel/ncc build ./.github/workflows/lib/main.ts -o ./.github/workflows/dist
+        env:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
       - run: yarn test:ci
-      - uses: amondnet/vercel-action@v20.0.1
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-          working-directory: ./coverage/lcov-report
+      - run: node ./.github/workflows/dist
+        env:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: amondnet/vercel-action@v20.0.1
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+      #     working-directory: ./coverage/lcov-report
