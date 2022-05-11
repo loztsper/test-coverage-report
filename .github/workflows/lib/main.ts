@@ -15,7 +15,7 @@ export const main = async () => {
     readFileSync("./coverage/coverage-summary.json", "utf8")
   );
 
-  const comment = await summary.addHeading("Test Results").addTable([
+  const comment = summary.addHeading("Test Results").addTable([
     [
       { data: "Status", header: true },
       { data: "Category", header: true },
