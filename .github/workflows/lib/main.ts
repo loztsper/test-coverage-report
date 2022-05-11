@@ -56,8 +56,8 @@ export const main = async () => {
     body: comment.stringify(),
   });
 
-  warning("testWarning", { file: "bar/foo.ts", startLine: 4 });
-  warning("testWarning2", { file: "foo.ts", startLine: 4 });
+  warning("testWarning", { file: "bar/foo.ts", startLine: 4, title: "title" });
+  warning("testWarning2", { file: "foo.ts", startLine: 4, title: "title" });
 };
 
 main();
