@@ -1,6 +1,6 @@
 import { readFileSync, write } from "node:fs";
 import { getOctokit, context } from "@actions/github";
-import { summary } from "@actions/core";
+import { summary, warning } from "@actions/core";
 
 export const main = async () => {
   const myToken = process.env.myToken;
@@ -47,7 +47,7 @@ export const main = async () => {
       `${coverageSummary.total.branches.covered} / ${coverageSummary.total.branches.total}`,
     ],
   ]);
-  comment.write();
+  await comment.write();
 
   await octokit.rest.issues.createComment({
     issue_number: context.issue.number,
@@ -55,6 +55,9 @@ export const main = async () => {
     repo: context.repo.repo,
     body: comment.stringify(),
   });
+
+  warning("testWarning", { file: "bar/foo.ts", startLine: 4 });
+  warning("testWarning2", { file: "foo.ts", startLine: 4 });
 };
 
 main();
