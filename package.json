@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "test:ci": "jest --coverage --silent"
+    "test:ci": "jest --coverage --json --outputFile='jest-output.json'"
   },
   "devDependencies": {
     "@actions/core": "1.8.0",

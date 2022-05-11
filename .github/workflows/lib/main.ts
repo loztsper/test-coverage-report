@@ -1,6 +1,6 @@
-import { readFileSync, write } from "node:fs";
+import { readFileSync } from "node:fs";
 import { getOctokit, context } from "@actions/github";
-import { summary, warning } from "@actions/core";
+import { summary } from "@actions/core";
 
 export const main = async () => {
   const myToken = process.env.myToken;
@@ -55,9 +55,8 @@ export const main = async () => {
     repo: context.repo.repo,
     body: comment.stringify(),
   });
-
-  warning("testWarning", { file: "bar/foo.ts", startLine: 4, title: "title" });
-  warning("testWarning2", { file: "foo.ts", startLine: 4, title: "title" });
+  const jestOutput = JSON.parse(readFileSync("jest-output.json", "utf8"));
+  console.log(jestOutput);
 };
 
 main();
